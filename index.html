@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#145b45">
+  <title>Daropod Welfare Organization | Ration Assistance</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --green: #145b45;
+      --green-dark: #0d4535;
+      --green-light: #eaf4ef;
+      --ink: #1d2b25;
+      --muted: #68766f;
+      --border: #dce6df;
+      --surface: #ffffff;
+      --background: #f5f8f5;
+      --error: #b42318;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--ink);
+      font-family: Tahoma, Arial, sans-serif;
+      line-height: 1.7;
+    }
+
+    .topbar {
+      background: var(--green);
+      color: white;
+      padding: 18px 24px;
+    }
+
+    .topbar-inner, main, footer {
+      width: min(100% - 32px, 880px);
+      margin-inline: auto;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.12rem;
+      font-weight: 700;
+    }
+
+    .brand-mark {
+      display: block;
+      width: 64px;
+      height: 80px;
+      object-fit: contain;
+    }
+
+    main { padding-block: 44px 56px; }
+
+    .intro {
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 8px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: var(--green-light);
+      color: var(--green);
+      font-size: .88rem;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--green-dark);
+      font-size: clamp(1.7rem, 5vw, 2.35rem);
+      line-height: 1.35;
+    }
+
+    .intro p {
+      max-width: 620px;
+      margin: 12px auto 0;
+      color: var(--muted);
+    }
+
+    .form-card {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--surface);
+      box-shadow: 0 12px 34px rgb(22 58 41 / 7%);
+    }
+
+    .card-heading {
+      padding: 20px 26px;
+      border-bottom: 1px solid var(--border);
+      background: #fbfdfb;
+    }
+
+    .card-heading h2 {
+      margin: 0;
+      font-size: 1.18rem;
+    }
+
+    .card-heading p {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    form { padding: 26px; }
+
+    .fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px 20px;
+    }
+
+    .field { min-width: 0; }
+    .field.wide { grid-column: 1 / -1; }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: .94rem;
+      font-weight: 700;
+    }
+
+    .required { color: var(--error); }
+
+    input, select, textarea {
+      width: 100%;
+      min-height: 48px;
+      padding: 11px 13px;
+      border: 1px solid #cbd8cf;
+      border-radius: 10px;
+      background: white;
+      color: var(--ink);
+      font: inherit;
+      font-size: 1rem;
+      text-align: left;
+      transition: border-color .15s ease, box-shadow .15s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--green);
+      outline: none;
+      box-shadow: 0 0 0 3px rgb(20 91 69 / 13%);
+    }
+
+    input::placeholder, textarea::placeholder { color: #929c96; }
+    input[dir="ltr"] { text-align: left; }
+    textarea { min-height: 112px; resize: vertical; }
+
+    .hint {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: .8rem;
+    }
+
+    .privacy-note {
+      display: flex;
+      gap: 10px;
+      margin-top: 22px;
+      padding: 13px 15px;
+      border-radius: 10px;
+      background: #f1f6f2;
+      color: #4e6257;
+      font-size: .87rem;
+    }
+
+    .privacy-note span:first-child { flex: 0 0 auto; }
+
+    .submit-button {
+      display: flex;
+      width: 100%;
+      min-height: 52px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+      border: 0;
+      border-radius: 11px;
+      background: var(--green);
+      color: white;
+      cursor: pointer;
+      font: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      transition: background .15s ease, transform .15s ease;
+    }
+
+    .submit-button:hover { background: var(--green-dark); }
+    .submit-button:active { transform: translateY(1px); }
+    .submit-button:focus-visible { outline: 3px solid #8cc3a6; outline-offset: 3px; }
+
+    .submit-hint {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: .82rem;
+      text-align: center;
+    }
+
+    footer {
+      padding-bottom: 24px;
+      color: var(--muted);
+      font-size: .84rem;
+      text-align: center;
+    }
+
+    @media (max-width: 620px) {
+      .topbar { padding: 14px 16px; }
+      main { padding-block: 30px 40px; }
+      .form-card { border-radius: 15px; }
+      .card-heading, form { padding: 20px; }
+      .fields { grid-template-columns: 1fr; gap: 15px; }
+      .field.wide { grid-column: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <img class="brand-mark" id="organization-logo" alt="Daropod Welfare Organization logo">
+        <span>Daropod Welfare Organization</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <span class="eyebrow">Ration assistance application</span>
+      <h1 id="page-title">Online Ration Application</h1>
+      <p>Please complete the form below with accurate information. Your application will be prepared as a WhatsApp message.</p>
+    </section>
+
+    <section class="form-card" aria-labelledby="form-title">
+      <div class="card-heading">
+        <h2 id="form-title">Application Form</h2>
+        <p>Fields marked with <span class="required">*</span> are required.</p>
+      </div>
+
+      <form id="application-form">
+        <div class="fields">
+          <div class="field">
+            <label for="applicant-name">Full name <span class="required">*</span></label>
+            <input id="applicant-name" name="applicantName" type="text" autocomplete="name" maxlength="100" required placeholder="Enter your full name">
+          </div>
+
+          <div class="field">
+            <label for="guardian-name">Father's / Husband's name <span class="required">*</span></label>
+            <input id="guardian-name" name="guardianName" type="text" maxlength="100" required placeholder="Enter father's or husband's name">
+          </div>
+
+          <div class="field">
+            <label for="mobile">Mobile number <span class="required">*</span></label>
+            <input id="mobile" name="mobile" type="tel" inputmode="numeric" dir="ltr" autocomplete="tel" maxlength="15" pattern="(?:\+?92|0)?3[0-9]{9}" required placeholder="03XXXXXXXXX" aria-describedby="mobile-hint">
+            <span class="hint" id="mobile-hint">Example: 03XXXXXXXXX</span>
+          </div>
+
+          <div class="field">
+            <label for="cnic">CNIC number <span class="required">*</span></label>
+            <input id="cnic" name="cnic" type="text" inputmode="numeric" dir="ltr" maxlength="15" pattern="[0-9]{5}-?[0-9]{7}-?[0-9]{1}" required placeholder="XXXXX-XXXXXXX-X" aria-describedby="cnic-hint">
+            <span class="hint" id="cnic-hint">13 digits, e.g. 12345-1234567-1</span>
+          </div>
+
+          <div class="field">
+            <label for="family-size">Number of people in household <span class="required">*</span></label>
+            <input id="family-size" name="familySize" type="number" inputmode="numeric" min="1" max="50" required placeholder="Example: 5">
+          </div>
+
+          <div class="field">
+            <label for="city">City / Area <span class="required">*</span></label>
+            <input id="city" name="city" type="text" autocomplete="address-level2" maxlength="100" required placeholder="Enter your city or area">
+          </div>
+
+          <div class="field wide">
+            <label for="address">Full address <span class="required">*</span></label>
+            <input id="address" name="address" type="text" autocomplete="street-address" maxlength="200" required placeholder="Enter your home address / neighborhood">
+          </div>
+
+          <div class="field wide">
+            <label for="purpose">Reason for application / assistance needed <span class="required">*</span></label>
+            <textarea id="purpose" name="purpose" maxlength="1000" required placeholder="Briefly describe your situation and needs"></textarea>
+          </div>
+        </div>
+
+        <div class="privacy-note" role="note">
+          <span aria-hidden="true">🔒</span>
+          <span>Your information will be included in a WhatsApp message to submit your application. WhatsApp will open after you submit this form; you must tap Send in WhatsApp to send it.</span>
+        </div>
+
+        <button class="submit-button" type="submit">
+          <span aria-hidden="true">➤</span>
+          <span>Submit Application via WhatsApp</span>
+        </button>
+        <p class="submit-hint">WhatsApp number: 0331 5566384</p>
+      </form>
+    </section>
+  </main>
+
+  <footer>Daropod Welfare Organization</footer>
+
+  <script>
+    const organizationLogo = [
+      "data:image/jpeg;base64,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"
+    ].join("");
+
+    const optimizedLogo = [
+      "data:image/webp;base64,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"
+    ].join("");
+    // Remove four duplicated characters from the embedded WebP payload.
+    document.getElementById("organization-logo").src = optimizedLogo.slice(0, 164) + optimizedLogo.slice(168);
+
+    const form = document.getElementById("application-form");
+    const whatsappNumber = "923315566384";
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      if (!form.reportValidity()) return;
+
+      const data = new FormData(form);
+      const message = [
+        "New ration assistance application",
+        "",
+        `Full name: ${data.get("applicantName")}`,
+        `Father's / Husband's name: ${data.get("guardianName")}`,
+        `Mobile number: ${data.get("mobile")}`,
+        `CNIC: ${data.get("cnic")}`,
+        `Number of people in household: ${data.get("familySize")}`,
+        `City / Area: ${data.get("city")}`,
+        `Address: ${data.get("address")}`,
+        `Reason for application: ${data.get("purpose")}`
+      ].join("\n");
+
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    });
+  </script>
+</body>
+</html>
